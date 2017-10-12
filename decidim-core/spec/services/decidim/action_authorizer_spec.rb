@@ -9,14 +9,14 @@ module Decidim
     let(:action) { "vote" }
     let(:permissions) { { action => permission } }
     let(:permission) { {} }
-    let(:name) { "foo_handler" }
+    let(:name) { "decidim/dummy_authorization_handler" }
     let(:metadata) { { postal_code: "1234", location: "Tomorrowland" } }
 
     let(:response) { subject.authorize }
 
     let(:permission) do
       {
-        "authorization_handler_name" => "foo_handler",
+        "authorization_handler_name" => "decidim/dummy_authorization_handler",
         "options" => options
       }
     end
@@ -45,7 +45,7 @@ module Decidim
           it "returns missing" do
             expect(response).to_not be_ok
             expect(response.code).to eq(:missing)
-            expect(response.handler_name).to eq("foo_handler")
+            expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
             expect(response.data).to be_empty
           end
         end
@@ -70,7 +70,7 @@ module Decidim
       context "when the data is valid" do
         let(:permission) do
           {
-            "authorization_handler_name" => "foo_handler",
+            "authorization_handler_name" => "decidim/dummy_authorization_handler",
             "options" => options
           }
         end
@@ -81,7 +81,7 @@ module Decidim
           it "returns missing" do
             expect(response).to_not be_ok
             expect(response.code).to eq(:missing)
-            expect(response.handler_name).to eq("foo_handler")
+            expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
             expect(response.data).to be_empty
           end
         end
@@ -100,7 +100,7 @@ module Decidim
             it "returns pending" do
               expect(response).to_not be_ok
               expect(response.code).to eq(:pending)
-              expect(response.handler_name).to eq("foo_handler")
+              expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
               expect(response.data).to include(fields: { "thing" => "123" })
             end
           end
@@ -120,7 +120,7 @@ module Decidim
               it "returns invalid" do
                 expect(response).to_not be_ok
                 expect(response.code).to eq(:invalid)
-                expect(response.handler_name).to eq("foo_handler")
+                expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
                 expect(response.data).to include(fields: { "postal_code" => "789" })
               end
             end
@@ -147,7 +147,7 @@ module Decidim
               it "returns incomplete with the fields" do
                 expect(response).to_not be_ok
                 expect(response.code).to eq(:incomplete)
-                expect(response.handler_name).to eq("foo_handler")
+                expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
                 expect(response.data).to include(fields: ["age"])
               end
             end

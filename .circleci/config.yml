@@ -427,6 +427,33 @@ jobs:
           command: cd /code/decidim-surveys && time bundle exec rake
       - store_artifacts:
           path: /code/spec/decidim_dummy_app/tmp/capybara
+  verifications:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /code
+      - run:
+          name: Install PhantomJS
+          command: |
+            curl -OLk https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+            tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
+            mv phantomjs-2.1.1-linux-x86_64 /usr/local/share
+            ln -sf /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin
+            rm phantomjs-2.1.1-linux-x86_64.tar.bz2
+      - run:
+          name: Create test DB
+          command: |
+            cd spec/decidim_dummy_app/
+            bundle install
+            RAILS_ENV=test bundle exec rake db:create db:schema:load
+      - run:
+          name: Run verifications JS tests
+          command: cd /code && time npm test -- decidim-verifications
+      - run:
+          name: Run verifications RSpec
+          command: cd /code/decidim-verifications && time bundle exec rake
+      - store_artifacts:
+          path: /code/spec/decidim_dummy_app/tmp/capybara
 
 workflows:
   version: 2
@@ -473,5 +500,8 @@ workflows:
           requires:
             - build
       - surveys:
+          requires:
+            - build
+      - verifications:
           requires:
             - build
