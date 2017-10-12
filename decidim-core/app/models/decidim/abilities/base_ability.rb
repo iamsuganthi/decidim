@@ -25,8 +25,15 @@ module Decidim
           merge ability.constantize.new(user, context)
         end
 
-        can :manage, Authorization do |authorization|
-          authorization.user == user
+        can :create, Authorization do |authorization|
+          authorization.user == user && not_already_active?(user, authorization)
+        end
+
+        can :update, Authorization do |authorization|
+          authorization.user == user &&
+            !authorization.granted? &&
+            single_pending?(user, authorization) &&
+            not_already_granted?(user, authorization)
         end
 
         can :manage, Follow do |follow|
@@ -36,6 +43,20 @@ module Decidim
         can :manage, Notification do |notification|
           notification.user == user
         end
+      end
+
+      private
+
+      def not_already_active?(user, authorization)
+        Authorizations.new(user: user, name: authorization.name).none?
+      end
+
+      def not_already_granted?(user, authorization)
+        Authorizations.new(user: user, name: authorization.name, granted: true).none?
+      end
+
+      def single_pending?(user, authorization)
+        Authorizations.new(user: user, name: authorization.name, granted: false).one?
       end
     end
   end

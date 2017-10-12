@@ -13,7 +13,7 @@ module Decidim
       )
     end
 
-    let(:authorizations) { Authorizations.new(user: user) }
+    let(:authorizations) { Authorizations.new(user: user, granted: true) }
 
     subject { described_class.new(handler) }
 
@@ -36,6 +36,12 @@ module Decidim
         subject.call
 
         expect(authorizations.first.metadata["document_number"]).to eq("12345678X")
+      end
+
+      it "sets the authorization as granted" do
+        subject.call
+
+        expect(authorizations.first).to be_granted
       end
     end
 

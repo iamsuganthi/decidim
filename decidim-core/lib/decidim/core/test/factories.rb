@@ -188,6 +188,15 @@ FactoryGirl.define do
     name "decidim/dummy_authorization_handler"
     user
     metadata { {} }
+    granted
+
+    trait :granted do
+      granted true
+    end
+
+    trait :pending do
+      granted false
+    end
   end
 
   factory :static_page, class: Decidim::StaticPage do

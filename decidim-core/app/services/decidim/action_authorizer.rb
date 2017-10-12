@@ -32,6 +32,7 @@ module Decidim
       return status(:ok) unless authorization_handler_name
 
       return status(:missing) unless authorization
+      return status(:pending, fields: pending_fields) if pending_fields.any?
       return status(:invalid, fields: unmatched_fields) if unmatched_fields.any?
       return status(:incomplete, fields: missing_fields) if missing_fields.any?
 
@@ -67,6 +68,10 @@ module Decidim
         missing << field if authorization.metadata[field].blank?
         missing
       end
+    end
+
+    def pending_fields
+      authorization.verification_metadata
     end
 
     def permission_options

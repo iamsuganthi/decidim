@@ -13,9 +13,14 @@ module Decidim
   class Authorization < ApplicationRecord
     belongs_to :user, foreign_key: "decidim_user_id", class_name: "Decidim::User"
 
-    validates :name, uniqueness: { scope: :decidim_user_id }
+    validates :name, uniqueness: { scope: [:decidim_user_id, :granted] }
+    validates :verification_metadata, absence: true, if: :granted?
 
     validate :active_handler?
+
+    def grant!
+      update!(granted: true, verification_metadata: {})
+    end
 
     private
 
