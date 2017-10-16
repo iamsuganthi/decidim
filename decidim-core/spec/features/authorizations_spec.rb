@@ -100,7 +100,7 @@ describe "Authorizations", type: :feature, perform_enqueued: true do
       end
     end
 
-    context "when the user has already been authorised" do
+    context "when the user has already been authorized" do
       let(:authorizations) { ["Decidim::DummyAuthorizationHandler"] }
 
       let!(:authorization) do
