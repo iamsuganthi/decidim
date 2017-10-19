@@ -32,7 +32,7 @@ module Decidim
       return status(:ok) unless authorization_handler_name
 
       return status(:missing) unless authorization
-      return status(:pending, fields: pending_fields) if pending_fields.any?
+      return status(:pending) unless authorization.granted?
       return status(:invalid, fields: unmatched_fields) if unmatched_fields.any?
       return status(:incomplete, fields: missing_fields) if missing_fields.any?
 
@@ -70,10 +70,6 @@ module Decidim
       end
     end
 
-    def pending_fields
-      authorization.verification_metadata
-    end
-
     def permission_options
       permission["options"] || {}
     end
@@ -104,6 +100,16 @@ module Decidim
         @auth_method ||= Verifications::Adapter.from_element(@handler_name)
       end
 
+      def current_path(redirect_url: nil)
+        return unless auth_method
+
+        if pending?
+          auth_method.resume_authorization_path(redirect_url: redirect_url)
+        else
+          auth_method.root_path(redirect_url: redirect_url)
+        end
+      end
+
       def handler_name
         return unless auth_method
 
@@ -112,6 +118,10 @@ module Decidim
 
       def ok?
         @code == :ok
+      end
+
+      def pending?
+        @code == :pending
       end
     end
 

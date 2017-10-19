@@ -90,18 +90,12 @@ module Decidim
           before { authorization.update!(user: user) }
 
           context "when it's not yet granted" do
-            before do
-              authorization.update!(
-                granted: false,
-                verification_metadata: { "thing" => "123" }
-              )
-            end
+            before { authorization.update!(granted: false) }
 
             it "returns pending" do
               expect(response).to_not be_ok
               expect(response.code).to eq(:pending)
               expect(response.handler_name).to eq("decidim/dummy_authorization_handler")
-              expect(response.data).to include(fields: { "thing" => "123" })
             end
           end
 
