@@ -14,9 +14,7 @@ module Decidim
         def new
           authorize! :create, @authorization
 
-          @form = UploadForm.from_params(
-            attachment: AttachmentForm.from_params({})
-          )
+          @form = UploadForm.new
         end
 
         def create
