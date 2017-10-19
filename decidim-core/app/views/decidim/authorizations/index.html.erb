@@ -11,7 +11,7 @@
                   <%= t("#{authorization.name}.name", scope: "decidim.authorization_handlers") %>
                 </h5>
                 <span class="text-small">
-                  <%= t("granted_at", timestamp: l(authorization.updated_at, format: :long), scope: "decidim.authorization_handlers") %>
+                  <%= t("granted_at", scope: "decidim.authorization_handlers", timestamp: l(authorization.updated_at, format: :long)) %>
                 </span>
               </div>
             </div>
@@ -33,7 +33,7 @@
                     <%= t("#{authorization.name}.name", scope: "decidim.authorization_handlers") %>
                   </h5>
                   <span class="text-small">
-                    <%= t("started_at", timestamp: l(authorization.updated_at, format: :long), scope: "decidim.authorization_handlers") %>
+                    <%= t("started_at", scope: "decidim.authorization_handlers", timestamp: l(authorization.updated_at, format: :long)) %>
                   </span>
                 </div>
               </div>
