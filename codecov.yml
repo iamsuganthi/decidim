@@ -48,6 +48,9 @@ coverage:
       surveys:
         threshold: 1%
         flags: surveys
+      verifications:
+        threshold: 1%
+        flags: verifications
 
     patch:
       default:
@@ -103,3 +106,6 @@ flags:
   surveys:
     paths:
       - decidim-surveys/
+  verifications:
+    paths:
+      - decidim-verifications/
