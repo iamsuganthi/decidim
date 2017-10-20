@@ -72,7 +72,7 @@ en:
               verification_number: 'Verification #%{n}'
           rejections:
             create:
-              success: Verification rejected. User will be prompted to ammend her documents
+              success: Verification rejected. User will be prompted to amend her documents
         authorizations:
           create:
             error: There was a problem uploading your document

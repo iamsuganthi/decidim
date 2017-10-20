@@ -51,7 +51,7 @@ describe "Identity document review", type: :feature do
     before { click_link "Reject" }
 
     it "dismisses the verification from the list" do
-      expect(page).to have_content("Verification rejected. User will be prompted to ammend her documents")
+      expect(page).to have_content("Verification rejected. User will be prompted to amend her documents")
       expect(page).to have_no_content("Verification #")
     end
 
