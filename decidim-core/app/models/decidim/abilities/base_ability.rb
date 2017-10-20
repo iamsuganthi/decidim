@@ -30,10 +30,7 @@ module Decidim
         end
 
         can :update, Authorization do |authorization|
-          authorization.user == user &&
-            !authorization.granted? &&
-            single_pending?(user, authorization) &&
-            not_already_granted?(user, authorization)
+          authorization.user == user && !authorization.granted?
         end
 
         can :manage, Follow do |follow|
@@ -49,14 +46,6 @@ module Decidim
 
       def not_already_active?(user, authorization)
         Verifications::Authorizations.new(user: user, name: authorization.name).none?
-      end
-
-      def not_already_granted?(user, authorization)
-        Verifications::Authorizations.new(user: user, name: authorization.name, granted: true).none?
-      end
-
-      def single_pending?(user, authorization)
-        Verifications::Authorizations.new(user: user, name: authorization.name, granted: false).one?
       end
     end
   end
