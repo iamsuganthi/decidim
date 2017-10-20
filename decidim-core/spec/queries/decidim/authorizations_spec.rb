@@ -6,10 +6,6 @@ describe Decidim::Authorizations do
   let(:name) { "some_method" }
   let(:user) { create(:user) }
 
-  let!(:pending_for_user_and_method) do
-    create(:authorization, :pending, name: name, user: user)
-  end
-
   let!(:granted_for_user_and_method) do
     create(:authorization, :granted, name: name, user: user)
   end
@@ -53,7 +49,6 @@ describe Decidim::Authorizations do
       let(:expectation) do
         [
           granted_for_user_and_method,
-          pending_for_user_and_method,
           granted_for_other_user,
           pending_for_other_user,
           granted_for_other_method,
@@ -90,7 +85,6 @@ describe Decidim::Authorizations do
 
       let(:expectation) do
         [
-          pending_for_user_and_method,
           pending_for_other_user,
           pending_for_other_method,
           pending_for_other_user_and_method
@@ -108,7 +102,6 @@ describe Decidim::Authorizations do
       let(:expectation) do
         [
           granted_for_user_and_method,
-          pending_for_user_and_method,
           granted_for_other_user,
           pending_for_other_user
         ]
@@ -135,7 +128,7 @@ describe Decidim::Authorizations do
       end
 
       let(:expectation) do
-        [pending_for_user_and_method, pending_for_other_user]
+        [pending_for_other_user]
       end
     end
   end
@@ -149,7 +142,6 @@ describe Decidim::Authorizations do
       let(:expectation) do
         [
           granted_for_user_and_method,
-          pending_for_user_and_method,
           granted_for_other_method,
           pending_for_other_method
         ]
@@ -175,9 +167,7 @@ describe Decidim::Authorizations do
         { user: user, name: nil, granted: false }
       end
 
-      let(:expectation) do
-        [pending_for_user_and_method, pending_for_other_method]
-      end
+      let(:expectation) { [pending_for_other_method] }
     end
   end
 
@@ -187,12 +177,7 @@ describe Decidim::Authorizations do
         { user: user, name: name, granted: nil }
       end
 
-      let(:expectation) do
-        [
-          granted_for_user_and_method,
-          pending_for_user_and_method
-        ]
-      end
+      let(:expectation) { [granted_for_user_and_method] }
     end
   end
 
@@ -212,7 +197,7 @@ describe Decidim::Authorizations do
         { user: user, name: name, granted: false }
       end
 
-      let(:expectation) { [pending_for_user_and_method] }
+      let(:expectation) { [] }
     end
   end
 end

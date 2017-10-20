@@ -185,7 +185,7 @@ FactoryGirl.define do
   end
 
   factory :authorization, class: Decidim::Authorization do
-    name "decidim/dummy_authorization_handler"
+    sequence(:name) { |n| "dummy_authorization_#{n}" }
     user
     metadata { {} }
     granted

@@ -37,16 +37,16 @@ module Decidim::Abilities
         end
 
         context "when authorization in process" do
-          let!(:authorization) { create(:authorization, :pending, user: user) }
-          let!(:other_authorization) { build(:authorization, granted: nil, user: user) }
+          let!(:authorization) { create(:authorization, :pending, name: "dummy", user: user) }
+          let!(:other_authorization) { build(:authorization, :pending, name: "dummy", user: user) }
 
           it { is_expected.to_not be_able_to(:create, other_authorization) }
           it { is_expected.to be_able_to(:update, authorization) }
         end
 
         context "when authorization already granted" do
-          let!(:authorization) { create(:authorization, :granted, user: user) }
-          let!(:other_authorization) { build(:authorization, user: user) }
+          let!(:authorization) { create(:authorization, :granted, name: "dummy", user: user) }
+          let!(:other_authorization) { build(:authorization, name: "dummy", user: user) }
 
           it { is_expected.to_not be_able_to(:create, other_authorization) }
           it { is_expected.to_not be_able_to(:update, authorization) }

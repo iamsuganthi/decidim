@@ -15,7 +15,7 @@ module Decidim
 
     belongs_to :user, foreign_key: "decidim_user_id", class_name: "Decidim::User"
 
-    validates :name, uniqueness: { scope: [:decidim_user_id, :granted] }
+    validates :name, uniqueness: { scope: [:decidim_user_id] }
     validates :verification_metadata, absence: true, if: :granted?
     validates :verification_attachment, absence: true, if: :granted?
 
