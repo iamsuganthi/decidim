@@ -16,8 +16,8 @@ Each decidim instance is in full control of its authorizations, and can customiz
 * The different actions in decidim that require authorization, and which
   authorization method they require. For example, a decidim instance might
   choose to require census authorization to create proposals, but a fully
-  verified address via a verification code for voting on proposals.  which
-  authorization.  methods to use to let users get verified, and
+  verified address via a verification code sent by postal mail for voting on
+  proposals.
 
 ## Types of authorization methods
 
