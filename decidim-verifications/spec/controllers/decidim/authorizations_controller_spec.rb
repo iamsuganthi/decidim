@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-module Decidim
+module Decidim::Verifications
   describe AuthorizationsController, type: :controller do
-    routes { Decidim::Core::Engine.routes }
+    routes { Decidim::Verifications::Engine.routes }
 
     include_context "authenticated user"
 
