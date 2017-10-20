@@ -191,11 +191,11 @@ FactoryGirl.define do
     granted
 
     trait :granted do
-      granted true
+      granted_at { 1.day.ago }
     end
 
     trait :pending do
-      granted false
+      granted_at nil
     end
   end
 

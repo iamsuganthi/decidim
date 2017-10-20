@@ -24,7 +24,11 @@ module Decidim
     def grant!
       remove_verification_attachment!
 
-      update!(granted: true, verification_metadata: {})
+      update!(granted_at: Time.zone.now, verification_metadata: {})
+    end
+
+    def granted?
+      !granted_at.nil?
     end
 
     private

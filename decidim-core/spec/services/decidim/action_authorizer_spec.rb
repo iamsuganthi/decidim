@@ -90,7 +90,7 @@ module Decidim
           before { authorization.update!(user: user) }
 
           context "when it's not yet granted" do
-            before { authorization.update!(granted: false) }
+            before { authorization.update!(granted_at: nil) }
 
             it "returns pending" do
               expect(response).to_not be_ok

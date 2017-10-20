@@ -2,19 +2,8 @@
 
 class AddStatusToAuthorizations < ActiveRecord::Migration[5.1]
   def change
-    add_column :decidim_authorizations,
-               :granted,
-               :boolean,
-               default: true,
-               null: false
+    add_column :decidim_authorizations, :granted_at, :datetime
 
-    change_column_default :decidim_authorizations, :granted, false
-
-    remove_index :decidim_authorizations, column: [:decidim_user_id, :name]
-
-    add_index :decidim_authorizations,
-              [:decidim_user_id, :name, :granted],
-              name: "index_decidim_authorizations_on_user_name_and_status",
-              unique: true
+    execute "UPDATE decidim_authorizations SET granted_at = updated_at"
   end
 end
