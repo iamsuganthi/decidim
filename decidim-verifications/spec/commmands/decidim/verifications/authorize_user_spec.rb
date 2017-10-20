@@ -2,18 +2,18 @@
 
 require "spec_helper"
 
-module Decidim
+module Decidim::Verifications
   describe AuthorizeUser do
     let(:user) { create(:user) }
     let(:document_number) { "12345678X" }
     let(:handler) do
-      DummyAuthorizationHandler.new(
+      Decidim::DummyAuthorizationHandler.new(
         document_number: document_number,
         user: user
       )
     end
 
-    let(:authorizations) { Authorizations.new(user: user, granted: true) }
+    let(:authorizations) { Decidim::Authorizations.new(user: user, granted: true) }
 
     subject { described_class.new(handler) }
 
