@@ -48,15 +48,15 @@ module Decidim
       private
 
       def not_already_active?(user, authorization)
-        Authorizations.new(user: user, name: authorization.name).none?
+        Verifications::Authorizations.new(user: user, name: authorization.name).none?
       end
 
       def not_already_granted?(user, authorization)
-        Authorizations.new(user: user, name: authorization.name, granted: true).none?
+        Verifications::Authorizations.new(user: user, name: authorization.name, granted: true).none?
       end
 
       def single_pending?(user, authorization)
-        Authorizations.new(user: user, name: authorization.name, granted: false).one?
+        Verifications::Authorizations.new(user: user, name: authorization.name, granted: false).one?
       end
     end
   end

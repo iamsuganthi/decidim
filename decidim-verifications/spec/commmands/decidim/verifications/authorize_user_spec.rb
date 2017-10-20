@@ -13,7 +13,7 @@ module Decidim::Verifications
       )
     end
 
-    let(:authorizations) { Decidim::Authorizations.new(user: user, granted: true) }
+    let(:authorizations) { Authorizations.new(user: user, granted: true) }
 
     subject { described_class.new(handler) }
 
