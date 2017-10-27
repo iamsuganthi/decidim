@@ -10,7 +10,7 @@ module Decidim::Verifications
 
     describe "handler" do
       it "injects the current_user" do
-        controller.params[:handler] = "decidim/dummy_authorization_handler"
+        controller.params[:handler] = "dummy_authorization_handler"
         expect(controller.send(:handler).user).to eq(user)
       end
     end

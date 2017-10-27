@@ -4,12 +4,12 @@ require "spec_helper"
 
 module Decidim
   module Admin
-    describe ManagedUserForm do
+    describe ManagedUserForm, with_authorization_workflows: ["dummy_authorization_handler"] do
       let(:organization) { create :organization }
       let(:name) { "Foo" }
       let(:authorization) do
         {
-          handler_name: "decidim/dummy_authorization_handler",
+          handler_name: "dummy_authorization_handler",
           document_number: "12345678X"
         }
       end
