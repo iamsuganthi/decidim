@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/decidim/decidim/tree/HEAD)
 
+**Added**:
+
+- **decidim-core**: Add view hooks so external engines can extend the homepage and other sections with their own code [\#2114](https://github.com/decidim/decidim/pull/2114)
+
 ## [v0.7.1](https://github.com/decidim/decidim/tree/v0.7.1) (2017-10-26)
 [Full Changelog](https://github.com/decidim/decidim/compare/v0.7.0...v0.7.1)
 
