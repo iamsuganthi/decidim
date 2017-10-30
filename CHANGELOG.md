@@ -2,6 +2,37 @@
 
 ## [Unreleased](https://github.com/decidim/decidim/tree/HEAD)
 
+**Added**
+
+- **decidim-verifications**: Support for deferred verification methods that require several steps in order to be granted. [\#2024](https://github.com/decidim/decidim/pull/2024)
+
+**Changed**
+
+- **decidim-verifications**: Authorization forms now must be registered using
+  the new API. If you previously had a custom authorization form registered via:
+
+  ```ruby
+  # config/initializers/decidim.rb
+
+  Decidim.configure do |config|
+    # ...
+
+    config.authorization_handlers = ["Decidim::MyCensusHandler"]
+
+    # ...
+  end
+  ```
+
+  You must change it to
+
+  ```ruby
+  # config/initializers/decidim.rb
+
+  Decidim::Verifications.register_workflow(:my_census_handler) do |auth|
+    auth.form = "Decidim::MyCensusHandler"
+  end
+  ```
+
 ## [v0.7.1](https://github.com/decidim/decidim/tree/v0.7.1) (2017-10-26)
 [Full Changelog](https://github.com/decidim/decidim/compare/v0.7.0...v0.7.1)
 
