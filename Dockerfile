@@ -56,6 +56,9 @@ ADD decidim-surveys/lib/decidim/surveys/version.rb /tmp/decidim-surveys/lib/deci
 ADD decidim-accountability/decidim-accountability.gemspec /tmp/decidim-accountability/decidim-accountability.gemspec
 ADD decidim-accountability/lib/decidim/accountability/version.rb /tmp/decidim-accountability/lib/decidim/accountability/version.rb
 
+ADD decidim-verifications/decidim-verifications.gemspec /tmp/decidim-verifications/decidim-verifications.gemspec
+ADD decidim-verifications/lib/decidim/verifications/version.rb /tmp/decidim-verifications/lib/decidim/verifications/version.rb
+
 ADD package.json /tmp/package.json
 ADD package-lock.json /tmp/package-lock.json
 
