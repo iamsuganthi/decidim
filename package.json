@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "apollo-codegen": "^0.17.0-alpha.8",
-    "classnames": "^2.2.5",
+    "classnames": "^2.5.1",
     "graphql-anywhere": "^3.1.0",
     "graphql-tag": "^2.4.2",
     "jquery": "^3.2.1",
